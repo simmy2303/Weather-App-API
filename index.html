@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+    </style>
+</head>
+<body>
+
+    
+    <div id="datetime">
+        <script src="time.js"></script></div>
+
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="Enter city name" spellcheck="false">
+            <button><img src="images/search.png"></button>
+        </div>
+        <div class="error" style="display: none;">
+            <p>Invalid City Name</p>
+        </div>
+        <div class="weather" style="display: none;">
+            <img src="images/rain.png" class="weather-icon">
+            <div class="weather-description" style="opacity:0;">Drizzle</div>
+            <h1 class="temp">22°C</h1>
+         
+            <div class="location">
+                
+                <h2 class="city">New York</h2><img src="images/location.png" class="location-icon" style="filter: invert(100%);">
+            </div>
+            <div class="details">
+                <div class="col">
+                    <img src="images/humidity.png">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="images/wind.png">
+                    <div>
+                        <p class="wind">15km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apikey = "29493c57b15202e43ade1165444e4545";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+        const searchbox = document.querySelector(".search input");
+        const searchbtn = document.querySelector(".search button");
+        const weatherIcon = document.querySelector(".weather-icon");
+        const weatherDescription = document.querySelector(".weather-description");
+
+        async function checkWeather(city) {
+            const response = await fetch(apiUrl + city + `&appid=${apikey}`);
+    
+            if (response.status === 404) {
+                document.querySelector(".error").style.display = "block";
+                document.querySelector(".weather").style.display = "none";
+            } else {
+                const data = await response.json();
+                    
+                console.log(data);
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+                document.querySelector(".humidity").innerHTML = data.main.humidity + " %";
+                document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+    
+                const weatherMain = data.weather[0].main.toLowerCase();
+    
+                if (weatherMain === "clouds") {
+                    weatherIcon.src = "images/clouds.png";
+                } else if (weatherMain === "clear") {
+                    weatherIcon.src = "images/clear.png";
+                } else if (weatherMain === "rain") {
+                    weatherIcon.src = "images/rain.png";
+                } else if (weatherMain === "drizzle") {
+                    weatherIcon.src = "images/drizzle.png";
+                } else if (weatherMain === "mist") {
+                    weatherIcon.src = "images/mist.png";
+                }
+    
+                document.querySelector(".weather").style.display = "block";
+                document.querySelector(".error").style.display = "none";
+                weatherDescription.innerHTML = data.weather[0].main;
+
+
+            }
+        }
+    
+        searchbtn.addEventListener("click", () => {
+            checkWeather(searchbox.value);
+        });
+
+    
+        searchbox.addEventListener("keydown", (event) => {
+            if (event.key === 'Enter') {
+                checkWeather(searchbox.value);
+            }
+        });
+        weatherIcon.addEventListener("mouseover", () => {
+            weatherDescription.style.opacity = 1;
+});
+
+weatherIcon.addEventListener("mouseout", () => {
+    weatherDescription.style.opacity = 0;
+});
+    </script>
+</body>
+</html>

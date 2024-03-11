@@ -1,0 +1,169 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:'Poppins';
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+
+}
+body{
+    background-color: #222;
+
+}
+.card {
+    width: 90%;
+    max-width: 470px;
+    background: linear-gradient(135deg, #00feba, #5b545b);
+    color: #fff;
+    margin: 50px auto 0; /* Updated margin to center the card */
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+    transition: transform 0.5s ease-in-out;
+    margin-bottom: 60px;
+}
+
+.search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+}
+
+.search input{
+    border:0;
+    outline:0;
+    background: #ebfffc;
+    color:#414141;
+    padding:10px 25px;
+    height:60px;
+    border-radius: 30px;
+    flex:1;
+    margin-right: 16px;
+    font-size: 16px;
+}
+.location {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    text-align: center; 
+}
+
+.location-icon {
+    width: 35px;
+    margin-left: 5px;
+}
+#datetime {
+    text-align: center;
+    font-family:'Poppins';
+    line-height: 40px;
+    font-size: 25px;
+    color: white;
+    font-weight:lighter;
+    letter-spacing: 0.080rem;
+    cursor: default;
+    justify-items: left;
+    margin-top: 60px;
+    transition: font-size 1s ease-in-out;
+  }
+
+
+.search input:hover{
+    box-shadow: white 0 0 6px;
+    transition: .2s;
+    cursor:auto;
+}
+
+.search button{
+    border:0;
+    outline:0;
+    background: #ebfffc;
+    border-radius: 50%;
+    width:60px;
+    height:60px;
+    cursor:pointer;
+}
+.search button img{
+    width:18px;
+    margin-top: 7px;
+}
+.search button:hover{
+    box-shadow: white 0 0 8px;
+    transition: .2s;
+}
+@keyframes example {
+    from {
+        width: 170px;
+    }
+    to {
+        width: 180px;
+    }
+}
+
+.weather-icon {
+    width: 170px;
+    margin-top: 30px;
+    cursor:pointer;
+    animation-name: example;
+    animation-duration: 4s;
+    animation: example 1.5s ease-in-out infinite alternate;
+    transition: width 0.5s ease-in-out;
+}
+.temp{
+    font-weight: bolder;
+}
+.weather-icon:hover {
+    width: 185px;
+    
+}
+.weather-description {
+    margin-top: -10px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, display 0.5s linear; /* Adjust the durations and timing functions as needed */
+}
+
+.weather-icon:hover + .weather-description {
+
+    opacity: 1;
+}
+.weather h1{
+    font-size:80px;
+    font-weight: 500;
+}
+.weather h2{
+    font-size:30px;
+    font-weight: 400;
+    margin-top: 0px;
+}
+.details{
+    display:flex;
+    align-items: cneter;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 50px;
+}
+.col{
+    display:flex;
+    align-items: center;
+    text-align: left;
+}
+.col img{
+    width:40px;
+    margin-right: 10px;
+}
+.humidity, .wind{
+    font-size: 28px;
+    /* margin-top: -6px; */
+
+}
+.weather{
+    display:none;
+}
+.error{
+    text-align: left;
+    margin-left: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    display:none;
+}
+
